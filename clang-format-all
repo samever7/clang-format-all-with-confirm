@@ -65,6 +65,18 @@ find-dominating-file() {
     return $?
 }
 
+# get confirm from user
+echo "Trying to clang-format all cpp/hpp files under $PWD, [c]ontinue? "
+read _b_continue
+
+case $_b_continue in
+C | c)    
+    ;;
+*)
+    exit 0
+    ;;
+esac
+
 # Run clang-format -i on all of the things
 for dir in "$@"; do
     pushd "${dir}" &>/dev/null
